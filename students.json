@@ -1,1 +1,1 @@
-[]
+[{"regno":"1","fname":"John","lname":"Doe","dob":"26/07/2019","sex":"Male","gradeLevel":"Class 1","studentGrades":{"studentReg":"1","english":"56","maths":"65","kiswahili":"45","science":"45","ssre":"67"}},{"regno":"2","fname":"Jane","lname":"Doe","dob":"10/07/2019","sex":"Female","gradeLevel":"Class 1"},{"regno":"3","fname":"Ken","lname":"Man","dob":"26/07/2019","sex":"Male","gradeLevel":"Class 1","studentGrades":{"studentReg":"3","english":"45","maths":"34","kiswahili":"67","science":"67","ssre":"24"}}]
