@@ -20,10 +20,6 @@ import java.util.List;
 import javax.swing.*;
 
 public class Application {
-    public static int students = 0;                 //Variable to keep count of all students
-    public static List<Student> listOfStudents;     //Universal ArrayList that stores all created students
-
-
     /*
      * This method saves all the students to the JSON file
      * Use this method after making any changes in the ArrayList
@@ -37,7 +33,7 @@ public class Application {
             BufferedWriter br =new BufferedWriter(new FileWriter("students.json", false));
             br.write(json);
             br.close();
-            JOptionPane.showMessageDialog(null, "Saved Successfully!");
+            JOptionPane.showMessageDialog(null, "Saved to File Successfully!");
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "Error! "+ e);
         }
@@ -48,13 +44,13 @@ public class Application {
      * Use this method every time the application is started and
      * before Adding, Editing or Deleting a student in order to get the most current state of the data
      */
-    public static List<Student> readStudents() {
-        listOfStudents = new ArrayList<Student>();
+    public static void readStudents() {
+        Main.listOfStudents = new ArrayList<Student>();
 
         //Check whether the file exists and whether it is empty
         File file = new File("students.json");
         if (file.length()==0) {
-            return listOfStudents;
+            return;
         }
 
         //If the file is not empty it proceeds to get Student objects from the file and adds them to the list of students
@@ -102,13 +98,13 @@ public class Application {
                 s = new Student(regno, fname, lname, dob, sex, gradeLevel);
             }
 
-            listOfStudents.add(s);
+            Main.listOfStudents.add(s);
         }
 
-        Student e = listOfStudents.get(listOfStudents.size() - 1);          //Get the last student in the list
-        students = Integer.parseInt(e.regno);                               //Set the reg number of the last student as the total number of students created
-
-        return listOfStudents;
+        if (!Main.listOfStudents.isEmpty()) {
+            Student e = Main.listOfStudents.get(Main.listOfStudents.size() - 1);          //Get the last student in the list
+            Main.students = Integer.parseInt(e.regno);                               //Set the reg number of the last student as the total number of students created
+        }
     }
 
     /*
@@ -118,12 +114,11 @@ public class Application {
      * When populating the UI for a user to make edits
      */
     public static int searchStudent(String regNo) {
-        for (Student s : listOfStudents) {
+        for (Student s : Main.listOfStudents) {
             if (s.regno.contentEquals(regNo)) {
-                return listOfStudents.indexOf(s);
+                return Main.listOfStudents.indexOf(s);
             }
         }
-        JOptionPane.showMessageDialog(null, "Student Does not Exist!");
         return Integer.MAX_VALUE;
     }
 
@@ -136,9 +131,9 @@ public class Application {
         if (index == Integer.MAX_VALUE) {
             return;
         }
-        listOfStudents.remove(index);
+        Main.listOfStudents.remove(index);
         JOptionPane.showMessageDialog(null, "Deleted Successfully!");
-        saveStudents(listOfStudents);
+        saveStudents(Main.listOfStudents);
     }
 
     /*
@@ -152,9 +147,9 @@ public class Application {
         if (index == Integer.MAX_VALUE) {
             return;
         }
-        listOfStudents.set(index,edit);
-        JOptionPane.showMessageDialog(null, "Edited Successfully!");
-        saveStudents(listOfStudents);
+        Main.listOfStudents.set(index,edit);
+        JOptionPane.showMessageDialog(null, "Added Successfully!");
+        saveStudents(Main.listOfStudents);
     }
 
 }

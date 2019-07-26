@@ -48,15 +48,22 @@ public class Grade {
     }
 
     //Method to generate a grade given some marks
-    public static String genGrade(int marks) {
-        if (marks < 40) {
+    public static String genGrade(String marks) {
+        double mark = Double.parseDouble(marks);
+        if (mark < 40) {
             return  "E";
-        }else if (marks < 50) {
+        }else if (mark < 50) {
             return  "D";
-        }else if (marks < 60) {
+        }else if (mark < 60) {
             return "C";
-        }else if (marks < 80) {
+        }else if (mark < 80) {
             return "B";
         }else return "A";
+    }
+
+    public int calculateTotal() {
+        int totals = Integer.parseInt(this.getMaths()) + Integer.parseInt(this.getEnglish()) + Integer.parseInt(this.getKiswahili())
+                + Integer.parseInt(this.getScience()) + Integer.parseInt(this.getSsre());
+        return totals;
     }
 }
